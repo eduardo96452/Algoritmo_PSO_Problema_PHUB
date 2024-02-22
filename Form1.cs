@@ -20,33 +20,44 @@ namespace Algoritmo_PSO_Problema_PHUB
 
         private void button1_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Multiselect = true;
-            openFileDialog.Filter = "Archivos de texto|*.txt";
-            openFileDialog.Title = "Selecciona archivos de texto";
+            // Ruta del archivo de texto
+            string rutaArchivo = "datos.txt";
 
-            List<string> archivosSeleccionados = new List<string>();
+            // Lista para almacenar los nodos
+            List<Nodo> nodos = new List<Nodo>();
 
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            // Leer el archivo de texto línea por línea
+            using (StreamReader sr = new StreamReader(rutaArchivo))
             {
-                List<string> contenidoArchivos = new List<string>();
-                foreach (string archivo in archivosSeleccionados)
+                string linea;
+                // Leer la primera línea para obtener información general
+                if ((linea = sr.ReadLine()) != null)
                 {
-                    string[] lineas = File.ReadAllLines(archivo);
-                    contenidoArchivos.AddRange(lineas);
-                }
-
-                MessageBox.Show("Contenido de los archivos seleccionados:");
-                foreach (string linea in contenidoArchivos)
-                {
-                    MessageBox.Show(linea);
+                    string[] infoGeneral = linea.Split(' ');
+                    int totalNodos = int.Parse(infoGeneral[0]);
+                    int p = int.Parse(infoGeneral[1]);
+                    int capacidadServidor = int.Parse(infoGeneral[2]);
+                    // Procesar el resto de las líneas
+                    while ((linea = sr.ReadLine()) != null)
+                    {
+                        string[] datosNodo = linea.Split(' ');
+                        Nodo nodo = new Nodo
+                        {
+                            Numero = int.Parse(datosNodo[0]),
+                            CoordenadaX = double.Parse(datosNodo[1]),
+                            CoordenadaY = double.Parse(datosNodo[2]),
+                            Demanda = int.Parse(datosNodo[3])
+                        };
+                        nodos.Add(nodo);
+                    }
                 }
             }
-            else
-            {
-                MessageBox.Show("No se seleccionaron archivos.");
-            }
 
+            // Mostrar los nodos en la consola (puedes adaptar esto para tu interfaz gráfica)
+            foreach (var nodo in nodos)
+            {
+                MessageBox.Show($"Nodo {nodo.Numero}: ({nodo.CoordenadaX}, {nodo.CoordenadaY}), Demanda: {nodo.Demanda}");
+            }
         }
     }
 }

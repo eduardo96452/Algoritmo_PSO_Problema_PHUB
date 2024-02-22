@@ -20,43 +20,56 @@ namespace Algoritmo_PSO_Problema_PHUB
 
         private void button1_Click(object sender, EventArgs e)
         {
-            // Ruta del archivo de texto
-            string rutaArchivo = "datos.txt";
+            // Crear un nuevo cuadro de diálogo de OpenFileDialog
+            OpenFileDialog openFileDialog = new OpenFileDialog();
 
-            // Lista para almacenar los nodos
-            List<Nodo> nodos = new List<Nodo>();
+            // Establecer propiedades del cuadro de diálogo
+            openFileDialog.Title = "Seleccionar archivo de datos";
+            openFileDialog.Filter = "Archivos de texto (*.txt)|*.txt|Todos los archivos (*.*)|*.*";
+            openFileDialog.FilterIndex = 1;
+            openFileDialog.RestoreDirectory = true;
 
-            // Leer el archivo de texto línea por línea
-            using (StreamReader sr = new StreamReader(rutaArchivo))
+            // Mostrar el cuadro de diálogo y esperar a que el usuario seleccione un archivo
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                string linea;
-                // Leer la primera línea para obtener información general
-                if ((linea = sr.ReadLine()) != null)
+                // Obtener la ruta del archivo seleccionado por el usuario
+                string rutaArchivo = openFileDialog.FileName;
+
+                // Lista para almacenar los nodos
+                List<Nodo> nodos = new List<Nodo>();
+
+                // Leer el archivo de texto línea por línea
+                using (StreamReader sr = new StreamReader(rutaArchivo))
                 {
-                    string[] infoGeneral = linea.Split(' ');
-                    int totalNodos = int.Parse(infoGeneral[0]);
-                    int p = int.Parse(infoGeneral[1]);
-                    int capacidadServidor = int.Parse(infoGeneral[2]);
-                    // Procesar el resto de las líneas
-                    while ((linea = sr.ReadLine()) != null)
+                    string linea;
+                    // Leer la primera línea para obtener información general
+                    if ((linea = sr.ReadLine()) != null)
                     {
-                        string[] datosNodo = linea.Split(' ');
-                        Nodo nodo = new Nodo
+                        string[] infoGeneral = linea.Split(' ');
+                        int totalNodos = int.Parse(infoGeneral[0]);
+                        int p = int.Parse(infoGeneral[1]);
+                        int capacidadServidor = int.Parse(infoGeneral[2]);
+                        // Procesar el resto de las líneas
+                        while ((linea = sr.ReadLine()) != null)
                         {
-                            Numero = int.Parse(datosNodo[0]),
-                            CoordenadaX = double.Parse(datosNodo[1]),
-                            CoordenadaY = double.Parse(datosNodo[2]),
-                            Demanda = int.Parse(datosNodo[3])
-                        };
-                        nodos.Add(nodo);
+                            string[] datosNodo = linea.Split(' ');
+                            Nodo nodo = new Nodo
+                            {
+                                NumeroNodo = int.Parse(datosNodo[0]),
+                                CoordenadaX = double.Parse(datosNodo[1]),
+                                CoordenadaY = double.Parse(datosNodo[2]),
+                                Demanda = int.Parse(datosNodo[3])
+                            };
+                            nodos.Add(nodo);
+                        }
                     }
                 }
-            }
 
-            // Mostrar los nodos en la consola (puedes adaptar esto para tu interfaz gráfica)
-            foreach (var nodo in nodos)
-            {
-                MessageBox.Show($"Nodo {nodo.Numero}: ({nodo.CoordenadaX}, {nodo.CoordenadaY}), Demanda: {nodo.Demanda}");
+                // Mostrar los nodos en mensajes emergentes (MessageBox)
+                foreach (var nodo in nodos)
+                {
+                    MessageBox.Show($"Nodo {nodo.NumeroNodo}: ({nodo.CoordenadaX}, {nodo.CoordenadaY}), Demanda: {nodo.Demanda}");
+                }
             }
         }
     }

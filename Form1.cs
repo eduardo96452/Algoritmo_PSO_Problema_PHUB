@@ -79,6 +79,7 @@ namespace Algoritmo_PSO_Problema_PHUB
                 catch (Exception ex)
                 {
                     MessageBox.Show($"Error al leer el archivo: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                 }
             }
         }

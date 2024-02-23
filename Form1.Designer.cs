@@ -48,33 +48,34 @@
             // 
             // button1
             // 
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.button1.BackColor = System.Drawing.Color.LightSkyBlue;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.Location = new System.Drawing.Point(29, 19);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(173, 36);
             this.button1.TabIndex = 0;
             this.button1.Text = "Seleccionar datos";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // textBox1
             // 
             this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(478, 26);
+            this.textBox1.Location = new System.Drawing.Point(502, 26);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(143, 22);
             this.textBox1.TabIndex = 1;
             // 
             // button2
             // 
+            this.button2.BackColor = System.Drawing.Color.PaleGreen;
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.Location = new System.Drawing.Point(674, 19);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(104, 36);
             this.button2.TabIndex = 2;
             this.button2.Text = "Generar";
-            this.button2.UseVisualStyleBackColor = true;
+            this.button2.UseVisualStyleBackColor = false;
             // 
             // Form1
             // 

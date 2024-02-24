@@ -44,7 +44,7 @@ namespace Algoritmo_PSO_Problema_PHUB
                 {
                     bestSolution = solution;
                     bestObjectiveValue = objectiveValue;
-                    form.TxtResults.AppendText($"Iteración {i + 1}: Mejor valor objetivo = {bestObjectiveValue}\r\n");
+                    //form.TxtResults.AppendText($"Iteración {i + 1}: Mejor valor objetivo = {bestObjectiveValue}\r\n");
                 }
             }
 
@@ -62,7 +62,7 @@ namespace Algoritmo_PSO_Problema_PHUB
                 {
                     if (!solution.Contains(nodo))
                     {
-                        totalDistance += Math.Sqrt(Math.Pow(server.CoordenadaX - nodo.CoordenadaX, 2) + Math.Pow(server.CoordenadaX - nodo.CoordenadaX, 2));
+                        totalDistance += Math.Sqrt(Math.Pow(server.CoordenadaX - nodo.CoordenadaX, 2) + Math.Pow(server.CoordenadaY - nodo.CoordenadaY, 2));
                     }
                 }
             }

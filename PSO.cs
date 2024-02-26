@@ -12,7 +12,7 @@ namespace Algoritmo_PSO_Problema_PHUB
     internal class PSO
     {
         // Definir constantes del PSO
-        private const int NumParticulas = 20;
+        int NumParticulas;
         private const double C1 = 2.0;
         private const double C2 = 2.0;
         private const double Inercia = 1.0;
@@ -27,14 +27,17 @@ namespace Algoritmo_PSO_Problema_PHUB
         private Random random;
         private TextBox textBoxResult;
         private TextBox textHubs;
+        int numHubsDisponibles;
         private PictureBox pictureBox;
 
-        public PSO(List<Nodo> nodos, TextBox textBoxResult, TextBox textHubs, PictureBox pictureBox)
+        public PSO(List<Nodo> nodos, TextBox textBoxResult, TextBox textHubs, PictureBox pictureBox, int p)
         {
             this.nodos = nodos;
             this.textBoxResult = textBoxResult;
             this.textHubs = textHubs;
             random = new Random();
+            NumParticulas = nodos.Count;
+            numHubsDisponibles = p;
             Inicializar();
             this.pictureBox = pictureBox;
         }
@@ -48,7 +51,7 @@ namespace Algoritmo_PSO_Problema_PHUB
             mejorFitnessGlobal = double.MaxValue;
 
             // Obtener el número de hubs disponibles
-            int numHubsDisponibles = nodos.Count < NumParticulas ? nodos.Count : NumParticulas;
+            //int numHubsDisponibles = nodos.Count < NumParticulas ? nodos.Count : NumParticulas;
 
             // Inicializar posiciones y velocidades aleatoriamente
             for (int i = 0; i < NumParticulas; i++)

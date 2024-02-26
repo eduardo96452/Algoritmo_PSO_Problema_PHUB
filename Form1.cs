@@ -70,7 +70,7 @@ namespace Algoritmo_PSO_Problema_PHUB
                         }
 
                         // Ejecutar el algoritmo PSO con los nodos leídos y el número de hubs disponibles
-                        PSO pso = new PSO(nodos, txtResults, txtHubs, pictureBox1);
+                        PSO pso = new PSO(nodos, txtResults, txtHubs, pictureBox1, p);
                         pso.EjecutarPSO();
 
                     }

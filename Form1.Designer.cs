@@ -28,114 +28,133 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.txtResults = new System.Windows.Forms.TextBox();
-            this.txtHubs = new System.Windows.Forms.TextBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.Pnl_Head = new System.Windows.Forms.Panel();
+            this.Btn_GenerarPso = new System.Windows.Forms.Button();
+            this.Txt_NumeroIteraciones = new System.Windows.Forms.TextBox();
+            this.Btn_SelecciónDatos = new System.Windows.Forms.Button();
+            this.Pbx_Nodos = new System.Windows.Forms.PictureBox();
+            this.lbl_iteraciones = new System.Windows.Forms.Label();
+            this.txtSoluciones = new System.Windows.Forms.RichTextBox();
+            this.Txt_MejorSolucion = new System.Windows.Forms.RichTextBox();
+            this.Pnl_Head.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Pbx_Nodos)).BeginInit();
             this.SuspendLayout();
             // 
-            // panel1
+            // Pnl_Head
             // 
-            this.panel1.BackColor = System.Drawing.Color.Gainsboro;
-            this.panel1.Controls.Add(this.button2);
-            this.panel1.Controls.Add(this.textBox1);
-            this.panel1.Controls.Add(this.button1);
-            this.panel1.Location = new System.Drawing.Point(0, 2);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(599, 78);
-            this.panel1.TabIndex = 0;
+            this.Pnl_Head.BackColor = System.Drawing.Color.Gainsboro;
+            this.Pnl_Head.Controls.Add(this.lbl_iteraciones);
+            this.Pnl_Head.Controls.Add(this.Btn_GenerarPso);
+            this.Pnl_Head.Controls.Add(this.Txt_NumeroIteraciones);
+            this.Pnl_Head.Controls.Add(this.Btn_SelecciónDatos);
+            this.Pnl_Head.Location = new System.Drawing.Point(0, 2);
+            this.Pnl_Head.Name = "Pnl_Head";
+            this.Pnl_Head.Size = new System.Drawing.Size(965, 78);
+            this.Pnl_Head.TabIndex = 0;
             // 
-            // button2
+            // Btn_GenerarPso
             // 
-            this.button2.BackColor = System.Drawing.Color.PaleGreen;
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(476, 19);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(104, 36);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Generar";
-            this.button2.UseVisualStyleBackColor = false;
+            this.Btn_GenerarPso.BackColor = System.Drawing.Color.PaleGreen;
+            this.Btn_GenerarPso.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_GenerarPso.Location = new System.Drawing.Point(775, 19);
+            this.Btn_GenerarPso.Name = "Btn_GenerarPso";
+            this.Btn_GenerarPso.Size = new System.Drawing.Size(104, 36);
+            this.Btn_GenerarPso.TabIndex = 2;
+            this.Btn_GenerarPso.Text = "Generar";
+            this.Btn_GenerarPso.UseVisualStyleBackColor = false;
+            this.Btn_GenerarPso.Click += new System.EventHandler(this.Btn_GenerarPso_Click);
             // 
-            // textBox1
+            // Txt_NumeroIteraciones
             // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(317, 26);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(143, 22);
-            this.textBox1.TabIndex = 1;
+            this.Txt_NumeroIteraciones.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Txt_NumeroIteraciones.Location = new System.Drawing.Point(598, 29);
+            this.Txt_NumeroIteraciones.Name = "Txt_NumeroIteraciones";
+            this.Txt_NumeroIteraciones.Size = new System.Drawing.Size(143, 26);
+            this.Txt_NumeroIteraciones.TabIndex = 1;
+            this.Txt_NumeroIteraciones.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // button1
+            // Btn_SelecciónDatos
             // 
-            this.button1.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(29, 19);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(173, 36);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Seleccionar datos";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.Btn_SelecciónDatos.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.Btn_SelecciónDatos.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_SelecciónDatos.Location = new System.Drawing.Point(83, 19);
+            this.Btn_SelecciónDatos.Name = "Btn_SelecciónDatos";
+            this.Btn_SelecciónDatos.Size = new System.Drawing.Size(173, 36);
+            this.Btn_SelecciónDatos.TabIndex = 0;
+            this.Btn_SelecciónDatos.Text = "Seleccionar datos";
+            this.Btn_SelecciónDatos.UseVisualStyleBackColor = false;
+            this.Btn_SelecciónDatos.Click += new System.EventHandler(this.Btn_SelecciónDatos_Click);
             // 
-            // txtResults
+            // Pbx_Nodos
             // 
-            this.txtResults.Location = new System.Drawing.Point(353, 86);
-            this.txtResults.Multiline = true;
-            this.txtResults.Name = "txtResults";
-            this.txtResults.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtResults.Size = new System.Drawing.Size(246, 177);
-            this.txtResults.TabIndex = 1;
+            this.Pbx_Nodos.BackColor = System.Drawing.Color.LightCyan;
+            this.Pbx_Nodos.Location = new System.Drawing.Point(3, 86);
+            this.Pbx_Nodos.Name = "Pbx_Nodos";
+            this.Pbx_Nodos.Size = new System.Drawing.Size(646, 521);
+            this.Pbx_Nodos.TabIndex = 3;
+            this.Pbx_Nodos.TabStop = false;
             // 
-            // txtHubs
+            // lbl_iteraciones
             // 
-            this.txtHubs.Location = new System.Drawing.Point(353, 269);
-            this.txtHubs.Multiline = true;
-            this.txtHubs.Name = "txtHubs";
-            this.txtHubs.Size = new System.Drawing.Size(246, 177);
-            this.txtHubs.TabIndex = 2;
+            this.lbl_iteraciones.AutoSize = true;
+            this.lbl_iteraciones.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_iteraciones.Location = new System.Drawing.Point(616, 10);
+            this.lbl_iteraciones.Name = "lbl_iteraciones";
+            this.lbl_iteraciones.Size = new System.Drawing.Size(104, 16);
+            this.lbl_iteraciones.TabIndex = 3;
+            this.lbl_iteraciones.Text = "N° Iteraciones";
             // 
-            // pictureBox1
+            // txtSoluciones
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(3, 86);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(344, 360);
-            this.pictureBox1.TabIndex = 3;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
+            this.txtSoluciones.BackColor = System.Drawing.Color.PowderBlue;
+            this.txtSoluciones.Font = new System.Drawing.Font("Times New Roman", 9.75F);
+            this.txtSoluciones.Location = new System.Drawing.Point(655, 86);
+            this.txtSoluciones.Name = "txtSoluciones";
+            this.txtSoluciones.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
+            this.txtSoluciones.Size = new System.Drawing.Size(310, 285);
+            this.txtSoluciones.TabIndex = 4;
+            this.txtSoluciones.Text = "";
+            // 
+            // Txt_MejorSolucion
+            // 
+            this.Txt_MejorSolucion.BackColor = System.Drawing.Color.PaleGreen;
+            this.Txt_MejorSolucion.Font = new System.Drawing.Font("Times New Roman", 9.75F);
+            this.Txt_MejorSolucion.Location = new System.Drawing.Point(655, 377);
+            this.Txt_MejorSolucion.Name = "Txt_MejorSolucion";
+            this.Txt_MejorSolucion.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
+            this.Txt_MejorSolucion.Size = new System.Drawing.Size(310, 230);
+            this.Txt_MejorSolucion.TabIndex = 5;
+            this.Txt_MejorSolucion.Text = "";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(600, 463);
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.txtHubs);
-            this.Controls.Add(this.txtResults);
-            this.Controls.Add(this.panel1);
+            this.ClientSize = new System.Drawing.Size(969, 619);
+            this.Controls.Add(this.Txt_MejorSolucion);
+            this.Controls.Add(this.txtSoluciones);
+            this.Controls.Add(this.Pbx_Nodos);
+            this.Controls.Add(this.Pnl_Head);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.Pnl_Head.ResumeLayout(false);
+            this.Pnl_Head.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Pbx_Nodos)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox txtResults;
-        private System.Windows.Forms.TextBox txtHubs;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Panel Pnl_Head;
+        private System.Windows.Forms.Button Btn_GenerarPso;
+        private System.Windows.Forms.TextBox Txt_NumeroIteraciones;
+        private System.Windows.Forms.Button Btn_SelecciónDatos;
+        private System.Windows.Forms.PictureBox Pbx_Nodos;
+        private System.Windows.Forms.Label lbl_iteraciones;
+        private System.Windows.Forms.RichTextBox txtSoluciones;
+        private System.Windows.Forms.RichTextBox Txt_MejorSolucion;
     }
 }
 

@@ -93,6 +93,7 @@
             this.Pbx_Nodos.Size = new System.Drawing.Size(646, 521);
             this.Pbx_Nodos.TabIndex = 3;
             this.Pbx_Nodos.TabStop = false;
+            this.Pbx_Nodos.Paint += new System.Windows.Forms.PaintEventHandler(this.Pbx_Nodos_Paint);
             // 
             // lbl_iteraciones
             // 
@@ -130,7 +131,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(969, 619);
+            this.ClientSize = new System.Drawing.Size(971, 619);
             this.Controls.Add(this.Txt_MejorSolucion);
             this.Controls.Add(this.txtSoluciones);
             this.Controls.Add(this.Pbx_Nodos);

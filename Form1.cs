@@ -111,6 +111,10 @@ namespace Algoritmo_PSO_Problema_PHUB
 
             }
             txtSoluciones.Text = sbsoluciones.ToString();
+
+            // Pintar los nodos Hub y los clientes en el PictureBox
+            Pbx_Nodos.Invalidate();
+                        
         }
 
         static Dictionary<int, List<int>> AsignacionClientesHub(double[] posicion)
@@ -264,6 +268,67 @@ namespace Algoritmo_PSO_Problema_PHUB
         static double Distancia(int x1, int y1, double x2, double y2)
         {
             return Math.Sqrt(Math.Pow(x2 - x1, 2) + Math.Pow(y2 - y1, 2));
+        }
+
+        private void Pbx_Nodos_Paint(object sender, PaintEventArgs e)
+        {
+            Graphics g = e.Graphics;
+            Pen pen = new Pen(Color.Black);
+
+            // Verificar si mejorPosicionGlobal es nulo
+            if (mejorPosicionGlobal == null)
+            {
+                return;
+            }
+
+            // Calcular el desplazamiento necesario para centrar el contenido
+            int offsetX = (int)((Pbx_Nodos.Width / 2) / 1.75 - (mejorPosicionGlobal.Max(x => x) + mejorPosicionGlobal.Min(x => x)) / 2);
+            int offsetY = (int)((Pbx_Nodos.Height / 2) / 1.75 - (mejorPosicionGlobal.Max(y => y) + mejorPosicionGlobal.Min(y => y)) / 2);
+
+            // Escalar la matriz de transformación para aplicar un zoom del 75% y centrar el contenido
+            g.TranslateTransform(offsetX, offsetY);
+            g.ScaleTransform(1.75f, 1.75f);
+
+            // Reducir el tamaño de la fuente en proporción al zoom
+            Font font = new Font(Font.FontFamily, Font.Size / 1.75f); // Aquí 1.75f es el factor de escala
+
+            // Dibujar los hubs
+            for (int i = 0; i < p; i++)
+            {
+                int x = (int)(mejorPosicionGlobal[i * 2] * 1.75); // Aplicar el mismo zoom a las coordenadas
+                int y = (int)(mejorPosicionGlobal[i * 2 + 1] * 1.75);
+                g.FillEllipse(Brushes.Red, x - 5, y - 5, 10, 10);
+                g.DrawString($"Hub {i + 1}", font, Brushes.Black, x + 5, y + 5);
+            }
+
+            // Dibujar los clientes y las líneas a los hubs correspondientes
+            for (int i = 0; i < n; i++)
+            {
+                int xCliente = (int)(clientes[i, 1] * 1.75); // Aplicar el mismo zoom a las coordenadas
+                int yCliente = (int)(clientes[i, 2] * 1.75);
+
+                // Encontrar el hub más cercano
+                double distanciaMinima = double.MaxValue;
+                int hubAsignado = -1;
+                for (int j = 0; j < p; j++)
+                {
+                    double distancia = Distancia(clientes[i, 1], clientes[i, 2], mejorPosicionGlobal[j * 2], mejorPosicionGlobal[j * 2 + 1]);
+                    if (distancia < distanciaMinima)
+                    {
+                        distanciaMinima = distancia;
+                        hubAsignado = j;
+                    }
+                }
+
+                // Dibujar línea al hub correspondiente
+                int xHub = (int)(mejorPosicionGlobal[hubAsignado * 2] * 1.75); // Aplicar el mismo zoom a las coordenadas
+                int yHub = (int)(mejorPosicionGlobal[hubAsignado * 2 + 1] * 1.75);
+                g.DrawLine(pen, xCliente, yCliente, xHub, yHub);
+
+                // Dibujar el cliente
+                g.FillEllipse(Brushes.Blue, xCliente - 3, yCliente - 3, 6, 6);
+                g.DrawString($"Cliente {i + 1}", font, Brushes.Black, xCliente + 5, yCliente + 5);
+            }
         }
     }
 }

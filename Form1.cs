@@ -22,7 +22,7 @@ namespace Algoritmo_PSO_Problema_PHUB
         static List<double[]> todasLasSoluciones = new List<double[]>(); //Lista para guardar todas las soluciones
 
         // Definición de las variables del algoritmo PSO
-        static int numParticulas = 2;
+        static int numParticulas = 0;
         static int numIteraciones = 1000;
         static int numMaxSoluciones = 1; // Cambia este valor al número deseado de soluciones
         static double w = 0.7; // inercia

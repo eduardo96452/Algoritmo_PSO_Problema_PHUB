@@ -103,7 +103,7 @@
             this.lbl_iteraciones.Name = "lbl_iteraciones";
             this.lbl_iteraciones.Size = new System.Drawing.Size(104, 16);
             this.lbl_iteraciones.TabIndex = 3;
-            this.lbl_iteraciones.Text = "N° Iteraciones";
+            this.lbl_iteraciones.Text = "N° Soluciones";
             // 
             // txtSoluciones
             // 
@@ -136,6 +136,8 @@
             this.Controls.Add(this.txtSoluciones);
             this.Controls.Add(this.Pbx_Nodos);
             this.Controls.Add(this.Pnl_Head);
+            this.MaximumSize = new System.Drawing.Size(987, 658);
+            this.MinimumSize = new System.Drawing.Size(987, 658);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";

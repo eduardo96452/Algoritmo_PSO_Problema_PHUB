@@ -22,7 +22,7 @@ namespace Algoritmo_PSO_Problema_PHUB
         static List<double[]> todasLasSoluciones = new List<double[]>(); //Lista para guardar todas las soluciones
 
         // Definición de las variables del algoritmo PSO
-        static int numParticulas = 0;
+        static int numParticulas = 20;
         static int numIteraciones = 1000;
         static int numMaxSoluciones = 1; // Cambia este valor al número deseado de soluciones
         static double w = 0.7; // inercia
@@ -62,7 +62,7 @@ namespace Algoritmo_PSO_Problema_PHUB
         
         private void Btn_GenerarPso_Click(object sender, EventArgs e)
         {
-            // Obtener el número de partículas desde Txt_NumeroIteraciones
+            // Obtener el número de iteraciones desde Txt_NumeroIteraciones
             if (!int.TryParse(Txt_NumeroIteraciones.Text, out numParticulas))
             {
                 MessageBox.Show("Por favor, ingresa un número válido de partículas.");
@@ -175,9 +175,14 @@ namespace Algoritmo_PSO_Problema_PHUB
         {
             mejorPosicionGlobal = new double[p * 2]; // Posiciones de los hubs (x, y)
             var rnd = new Random();
-            for (int i = 0; i < p * 2; i++)
+            List<int> nodosClientes = Enumerable.Range(0, n).ToList(); // Lista de índices de nodos clientes
+            for (int i = 0; i < p * 2; i += 2)
             {
-                mejorPosicionGlobal[i] = rnd.Next(100); // Supongamos un espacio de búsqueda de 0 a 100
+                int indiceAleatorio = rnd.Next(0, nodosClientes.Count); // Seleccionar un índice aleatorio de la lista de nodos clientes
+                int indiceNodoCliente = nodosClientes[indiceAleatorio]; // Obtener el índice del nodo cliente seleccionado
+                mejorPosicionGlobal[i] = clientes[indiceNodoCliente, 1]; // Establecer la coordenada X del hub como la coordenada X del nodo cliente
+                mejorPosicionGlobal[i + 1] = clientes[indiceNodoCliente, 2]; // Establecer la coordenada Y del hub como la coordenada Y del nodo cliente
+                nodosClientes.RemoveAt(indiceAleatorio); // Eliminar el nodo cliente seleccionado de la lista para evitar seleccionarlo nuevamente
             }
         }
 
@@ -185,7 +190,6 @@ namespace Algoritmo_PSO_Problema_PHUB
         {
             double[][] particulas = new double[numParticulas][];
             double[][] velocidades = new double[numParticulas][];
-
 
             // Inicializar partículas
             var rnd = new Random();
@@ -239,8 +243,33 @@ namespace Algoritmo_PSO_Problema_PHUB
                     particulas[i] = posicionActual;
                     velocidades[i] = velocidadActual;
                 }
+
+                // Identificar el cliente que minimiza la suma de distancias a todos los demás clientes
+                double mejorDistancia = double.MaxValue;
+                int mejorCliente = -1;
+                for (int i = 0; i < n; i++)
+                {
+                    double distanciaTotal = 0;
+                    for (int j = 0; j < n; j++)
+                    {
+                        if (i != j)
+                        {
+                            distanciaTotal += Distancia(clientes[i, 1], clientes[i, 2], clientes[j, 1], clientes[j, 2]);
+                        }
+                    }
+                    if (distanciaTotal < mejorDistancia)
+                    {
+                        mejorDistancia = distanciaTotal;
+                        mejorCliente = i;
+                    }
+                }
+
+                // Establecer las coordenadas del mejor cliente como las coordenadas del servidor
+                mejorPosicionGlobal[(p - 1) * 2] = clientes[mejorCliente, 1];
+                mejorPosicionGlobal[((p - 1) * 2) + 1] = clientes[mejorCliente, 2];
             }
         }
+
 
         static double FuncionObjetivo(double[] posicion)
         {

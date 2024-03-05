@@ -19,7 +19,7 @@ namespace Algoritmo_PSO_Problema_PHUB
         static int p; // número de hubs
         static int Q; // capacidad de los hubs
         static int[,] clientes; // matriz de clientes: [id, x, y, demanda]
-        static List<double[]> todasLasSoluciones = new List<double[]>(); //Lista para guardar todas las soluciones
+        static List<double[]> todasLasSoluciones = new List<double[]>(); //Lista de arreglos de Double para guardar todas las soluciones
 
         // Definición de las variables del algoritmo PSO
         static int numParticulas = 20;
@@ -195,26 +195,30 @@ namespace Algoritmo_PSO_Problema_PHUB
             var rnd = new Random();
             for (int i = 0; i < numParticulas; i++)
             {
-                particulas[i] = new double[p * 2];
-                velocidades[i] = new double[p * 2];
+                particulas[i] = new double[p * 2]; // Inicializar la posición de la partícula
+                velocidades[i] = new double[p * 2]; // Inicializar la velocidad de la partícula
                 for (int j = 0; j < p * 2; j++)
                 {
-                    particulas[i][j] = rnd.Next(100); // Supongamos un espacio de búsqueda de 0 a 100
-                    velocidades[i][j] = 0;
+                    particulas[i][j] = rnd.Next(100); // Inicializar la posición con valores aleatorios entre 0 y 100
+                    velocidades[i][j] = 0; // Inicializar la velocidad a cero
                 }
             }
 
             for (int iteracion = 0; iteracion < numIteraciones && todasLasSoluciones.Count < numMaxSoluciones; iteracion++)
             {
+                //se realiza el bucle principal del algoritmo PSO. En cada iteración,
+                //se actualiza la posición de cada partícula basándose en su velocidad
+                //y se evalúa la función objetivo.
                 for (int i = 0; i < numParticulas; i++)
                 {
+                    // Obtener la posición y velocidad actual de la partícula
                     double[] posicionActual = particulas[i];
                     double[] velocidadActual = velocidades[i];
 
-                    // Evaluar la función objetivo
+                    // Evaluar la función objetivo de la posición actual
                     double valorActual = FuncionObjetivo(posicionActual);
 
-                    // Actualizar mejor posición local
+                    // Actualizar la mejor posición global si es necesario
                     if (valorActual < mejorValorGlobal)
                     {
                         mejorValorGlobal = valorActual;
@@ -224,14 +228,16 @@ namespace Algoritmo_PSO_Problema_PHUB
                     // Agregar solución actual a la lista de todas las soluciones
                     todasLasSoluciones.Add(posicionActual);
 
-                    // Actualizar velocidad y posición
+                    // Actualizar la velocidad y posición de la partícula
                     for (int j = 0; j < p * 2; j++)
                     {
+                        // Calcular las nuevas velocidades basadas en la fórmula del PSO
                         double r1 = rnd.NextDouble();
                         double r2 = rnd.NextDouble();
                         velocidadActual[j] = w * velocidadActual[j] +
                                               c1 * r1 * (mejorPosicionGlobal[j] - posicionActual[j]) +
                                               c2 * r2 * (mejorPosicionGlobal[j] - posicionActual[j]);
+                        // Actualizar la posición de la partícula basada en la nueva velocidad
                         posicionActual[j] += velocidadActual[j];
 
                         // Limitar posición a un rango válido (0 a 100)
@@ -239,7 +245,7 @@ namespace Algoritmo_PSO_Problema_PHUB
                         if (posicionActual[j] > 100) posicionActual[j] = 100;
                     }
 
-                    // Actualizar partícula
+                    // Actualizar la posición y velocidad de la partícula en las matrices
                     particulas[i] = posicionActual;
                     velocidades[i] = velocidadActual;
                 }
@@ -264,12 +270,11 @@ namespace Algoritmo_PSO_Problema_PHUB
                     }
                 }
 
-                // Establecer las coordenadas del mejor cliente como las coordenadas del servidor
+                // Actualizar las coordenadas del último hub con las coordenadas del mejor cliente
                 mejorPosicionGlobal[(p - 1) * 2] = clientes[mejorCliente, 1];
                 mejorPosicionGlobal[((p - 1) * 2) + 1] = clientes[mejorCliente, 2];
             }
         }
-
 
         static double FuncionObjetivo(double[] posicion)
         {
